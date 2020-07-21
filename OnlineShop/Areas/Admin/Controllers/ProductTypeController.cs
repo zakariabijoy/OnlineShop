@@ -33,11 +33,11 @@ namespace OnlineShop.Areas.Admin.Controllers
         // Create Post Action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProductTypes productType)
+        public async Task<IActionResult> Create(ProductTypes model)
         {
             if (ModelState.IsValid)
             {
-                _db.ProductTypes.Add(productType);
+                await _db.ProductTypes.AddAsync(model);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
