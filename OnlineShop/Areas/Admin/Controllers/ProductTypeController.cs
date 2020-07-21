@@ -22,5 +22,27 @@ namespace OnlineShop.Areas.Admin.Controllers
             var productTypeList = _db.ProductTypes.ToList();
             return View(productTypeList);
         }
+
+        // Create Get Action Method
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // Create Post Action Method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ProductTypes productType)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ProductTypes.Add(productType);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
     }
 }
