@@ -1,0 +1,10 @@
+﻿@model int
+
+
+<div class="btn-group" style="width: 25px;" >
+    <a asp-area="Admin" asp-controller="ProductType" asp-action="Edit" asp-route-id="@Model" class="btn btn-warning">Edit</a>
+    <a asp-area="Admin" asp-controller="ProductType" asp-action="Details"  asp-route-id="@Model"class="btn btn-info">Details</a>
+    <a asp-area="Admin" asp-controller="ProductType" asp-action="Delete" asp-route-id="@Model" class="btn btn-danger">Delete</a>
+</div>
+
+
