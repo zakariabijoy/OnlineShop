@@ -45,6 +45,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(model);
         }
 
+        // Edit Get Action Method
 
         public IActionResult Edit(int id)
         {
@@ -64,7 +65,7 @@ namespace OnlineShop.Areas.Admin.Controllers
 
         }
 
-        // Create Post Action Method
+        // Edit Post Action Method
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProductTypes model)
@@ -79,6 +80,7 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(model);
         }
 
+        // Details Action Method
         public IActionResult Details(int id)
         {
             if (id > 0)
@@ -96,6 +98,42 @@ namespace OnlineShop.Areas.Admin.Controllers
             return NotFound();
 
         }
+
+        // Delete Get Action Method
+
+        public IActionResult Delete(int id)
+        {
+            if (id > 0)
+            {
+                var productType = _db.ProductTypes.Find(id);
+
+                if (productType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(productType);
+            }
+
+            return NotFound();
+
+        }
+
+        // Delete Post Action Method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(ProductTypes model)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ProductTypes.Remove(model);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(model);
+        }
+
 
     }
 }
