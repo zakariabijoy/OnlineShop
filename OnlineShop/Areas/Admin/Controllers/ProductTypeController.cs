@@ -42,7 +42,42 @@ namespace OnlineShop.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View();
+            return View(model);
         }
+
+
+        public IActionResult Edit(int id)
+        {
+            if (id > 0)
+            {
+                var productType = _db.ProductTypes.Find(id);
+
+                if (productType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(productType);
+            }
+
+            return NotFound();
+
+        }
+
+        // Create Post Action Method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ProductTypes model)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ProductTypes.Update(model);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(model);
+        }
+
     }
 }
