@@ -79,5 +79,23 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View(model);
         }
 
+        public IActionResult Details(int id)
+        {
+            if (id > 0)
+            {
+                var productType = _db.ProductTypes.Find(id);
+
+                if (productType == null)
+                {
+                    return NotFound();
+                }
+
+                return View(productType);
+            }
+
+            return NotFound();
+
+        }
+
     }
 }
