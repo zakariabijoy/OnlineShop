@@ -32,4 +32,18 @@
         }
     </table>
 </div>
+@section Scripts {
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        $().ready(function () {
+            var save = "@TempData["save"]";
+            console.log(save);
+
+            if (save != "") {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success(save);
+            }
+        });
+    </script>
+}
 
