@@ -1,0 +1,94 @@
+﻿@model OnlineShop.Models.Product
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<h2 class="text-info">Add New Product</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="p-4 rounded border">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-md-5">
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label asp-for="Price"></label>
+            </div>
+            <div class="col-md-5">
+                <input asp-for="Price" class="form-control" />
+            </div>
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label>Image</label>
+            </div>
+            <div class="col-md-5">
+                <input name="image" class="form-control" type="file" />
+            </div>
+        </div>
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label asp-for="ProductColor"></label>
+            </div>
+            <div class="col-md-5">
+                <input asp-for="ProductColor" class="form-control" />
+            </div>
+            <span asp-validation-for="ProductColor" class="text-danger"></span>
+        </div>
+
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label asp-for="ProductTypeId"></label>
+            </div>
+            <div class="col-md-5">
+                <select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypes" class="form-control">
+                    <option value="">-- Select Product Type --</option>
+                </select>
+            </div>
+            <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+        </div>
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label asp-for="TagId"></label>
+            </div>
+            <div class="col-md-5">
+
+                <select asp-for="TagId" asp-items="ViewBag.Tags" class="form-control">
+                    <option value="">-- Select Tag --</option>
+                </select>
+            </div>
+            <span asp-validation-for="TagId" class="text-danger"></span>
+
+        </div>
+        <div clas class="form-group row">
+            <div class="col-md-2">
+                <label asp-for="IsAvailable"></label>
+            </div>
+            <div class="col-md-5">
+                <input asp-for="IsAvailable" class="" type="checkbox" />
+            </div>
+            <span asp-validation-for="IsAvailable" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <a class="btn btn-success" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

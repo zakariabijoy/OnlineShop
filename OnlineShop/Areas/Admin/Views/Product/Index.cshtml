@@ -17,8 +17,8 @@
 
 <br />
 <div>
-    <table class="table table-striped border table-info">
-        <tr>
+    <table class="table table-striped border ">
+        <tr class="table-info">
             <th>
                 @Html.DisplayNameFor(m => m.Name)
             </th>
@@ -29,7 +29,10 @@
                 @Html.DisplayNameFor(m => m.ProductColor)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m.ProductTypes)
+                @Html.DisplayNameFor(m => m.ProductTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.TagId)
             </th>
             <th>
                 @Html.DisplayNameFor(m => m.IsAvailable)
@@ -44,6 +47,7 @@
                 <td>@item.Price</td>
                 <td>@item.ProductColor</td>
                 <td>@item.ProductTypes.ProductType</td>
+                <td>@item.Tag.Name</td>
                 <td>@item.IsAvailable</td>
                 <td> <partial name="_ButtonsPartial" model="item.Id" /></td>
             </tr>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Data;
 using OnlineShop.Models;
@@ -35,6 +36,17 @@ namespace OnlineShop.Areas.Admin.Controllers
         // Create Get Action Method
         public IActionResult Create()
         {
+            ViewBag.ProductTypes = _db.ProductTypes.ToList().Select(pt => new SelectListItem()
+            {
+                Text = pt.ProductType,
+                Value = pt.Id.ToString()
+            });
+
+            ViewBag.Tags = _db.Tags.ToList().Select(t => new SelectListItem()
+            {
+                Text = t.Name,
+                Value = t.Id.ToString()
+            });
             return View();
         }
 
@@ -52,11 +64,28 @@ namespace OnlineShop.Areas.Admin.Controllers
                     await image.CopyToAsync(new FileStream(pathName, FileMode.Create));
                     product.ImageUrl = "images/"+ image.FileName;
                 }
+
+                if(image == null)
+                {
+                    product.ImageUrl = "images/ImageNotAvailable.jpg";
+                }
+
                 await _db.Products.AddAsync(product);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
+            ViewBag.ProductTypes = _db.ProductTypes.ToList().Select(pt => new SelectListItem()
+            {
+                Text = pt.ProductType,
+                Value = pt.Id.ToString()
+            });
+
+            ViewBag.Tags = _db.Tags.ToList().Select(t => new SelectListItem()
+            {
+                Text = t.Name,
+                Value = t.Id.ToString()
+            });
             return View(product);
         }
 
